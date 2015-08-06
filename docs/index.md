@@ -1,13 +1,5 @@
 # React Async
 
-**WARNING:** Keeping data in React component's state is a bad idea. React
-component's state is for purely UI state, like "if this dropdown openned or
-closed?". In light of that, React Async is an anti-pattern so you shouldn't use
-it unless you are 100% sure you need it. There are better patterns to keep
-dataflow organized in React apps, check [Flux][], for example.
-
-[Flux]: http://facebook.github.io/flux/
-
 React Async is an addon for React which allows to define and render components
 which require a part of its state to be fetched via an asynchronous method (for
 example using an XHR request to get data from a server).
@@ -55,13 +47,13 @@ declare `getInitialStateAsync(cb)` method:
     var Component = React.createClass({
       mixins: [ReactAsync.Mixin],
 
-      getInitialStateAsync(cb) {
+      getInitialStateAsync: function(cb) {
         xhr('/api/data', function(data) {
           cb(null, data)
         }.bind(this))
       },
 
-      render() { ... }
+      render: function() { ... }
     })
 
 The method `getInitialStateAsync` mimics `getInitialState` but can fetch state
@@ -84,14 +76,14 @@ renders it would defer rendering unless async state is prefetched.
 If you want to defer first render unless async state is fetched you should
 provide a `preloader` prop:
 
-    <Preloaded preloader={<Spinner />}>
+    <Preloaded preloader={Spinner()}>
       {this.renderAsyncTabContents({url: this.state.url})
     </Preloaded>
 
 You also can force preloader on subsequent renders with `alwayUsePreloader`
 prop:
 
-    <Preloaded preloader={<Spinner />} alwayUsePreloader>
+    <Preloaded preloader={Spinner()} alwayUsePreloader>
       {this.renderAsyncTabContents({url: this.state.url})
     </Preloaded>
 
@@ -99,11 +91,11 @@ prop:
 
 The problem arises when you want to render UI on server with React.
 
-While React provides `renderToString` function which can produce markup
+While React provides `renderComponentToString` function which can produce markup
 for a component, this function is synchronous. That means that it can't be used
 when you want to get markup from server populated with data.
 
-React Async provides another function `renderToStringAsync`
+React Async provides another function `renderComponentToStringWithAsyncState`
 which is asynchronous and triggers `getInitialStateAsync` calls in the component
 hierarchy.
 
@@ -113,8 +105,8 @@ First, you'd need to install `fibers` package from npm to use that function:
 
 Then use it like:
 
-    ReactAsync.renderToStringAsync(
-      <Component />,
+    ReactAsync.renderComponentToStringWithAsyncState(
+      Component(),
       function(err, markup) {
         // send markup to browser
       })
@@ -125,11 +117,11 @@ hierarchy.
 ### Manually injecting fetched state
 
 If you'd need more control over how state is injected into your markup you can
-pass a third argument to the `renderToStringAsync` callback
+pass a third argument to the `renderComponentToStringWithAsyncState` callback
 function which contains a snapshot of the current server state:
 
-    ReactAsync.renderToStringAsync(
-      <Component />,
+    ReactAsync.renderComponentToStringWithAsyncState(
+      Component(),
       function(err, markup, data) {
         ...
       })
@@ -139,8 +131,8 @@ In addition to injecting the current server state, `injectIntoMarkup` can also
 reference your client script bundles ensuring server state is available before
 they are run:
 
-    ReactAsync.renderToStringAsync(
-      <Component />,
+    ReactAsync.renderComponentToStringWithAsyncState(
+      Component(),
       function(err, markup, data) {
         res.send(ReactAsync.injectIntoMarkup(markup, data, ['./client.js']))
       })
@@ -213,7 +205,7 @@ Optionally components could define `stateToJSON(state)` and
 `stateFromJSON(data)` methods to customize how state serialized and deserialized
 when it's transfered to a browser.
 
-#### **ReactAsync.renderToStringAsync(component, cb)**
+#### **ReactAsync.renderComponentToStringWithAsyncState(component, cb)**
 
 Renders component to a markup string while  calling `getInitialStateAsync(cb)`
 method of asynchronous components in the component hierarchy.
