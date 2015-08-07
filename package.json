@@ -1,7 +1,7 @@
 {
-  "name": "react-async",
-  "version": "2.1.0",
-  "description": "React addon to render async components on server",
+  "name": "react-async-legacy",
+  "version": "1.0.0",
+  "description": "React addon to render async components on server with hacky support for React 0.13+",
   "main": "index.js",
   "browser": "browser.js",
   "peerDependencies": {
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/andreypopp/react-async"
+    "url": "git://github.com/eiriklv/react-async-legacy"
   },
   "keywords": [
     "react-component",
@@ -39,9 +39,9 @@
   "author": "Andrey Popp <8mayday@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andreypopp/react-async/issues"
+    "url": "https://github.com/eiriklv/react-async-legacy/issues"
   },
-  "homepage": "https://github.com/andreypopp/react-async",
+  "homepage": "https://github.com/eiriklv/react-async-legacy",
   "dependencies": {
     "ascii-json": "~0.2.0"
   }
