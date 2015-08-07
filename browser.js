@@ -68,9 +68,24 @@ var Mixin = {
   }
 };
 
+var ComponentId = function(uniqueID) {
+    var mountDepth = 0;
+
+    return {
+        getRootNodeID() {
+            return uniqueID;
+        },
+
+        getMountDepth() {
+            return mountDepth++;
+        },
+    };
+};
+
 module.exports = {
   prefetchAsyncState: prefetchAsyncState,
   isAsyncComponent: isAsyncComponent,
+  ComponentId: ComponentId,
   Mixin: Mixin,
   Preloaded: Preloaded
 };
