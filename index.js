@@ -116,11 +116,11 @@ var ComponentId = function(uniqueID) {
     var mountDepth = 0;
 
     return {
-        getRootNodeID() {
+        getRootNodeID: function() {
             return uniqueID;
         },
 
-        getMountDepth() {
+        getMountDepth: function() {
             return mountDepth++;
         },
     };
