@@ -77,7 +77,7 @@ var ComponentId = function(uniqueID) {
         },
 
         getMountDepth: function() {
-            return mountDepth++;
+            return mountDepth;
         },
     };
 };
