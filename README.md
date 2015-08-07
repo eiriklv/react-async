@@ -1,5 +1,8 @@
 # React Async (Legacy edition with hacky React 0.13.x support)
 
+**EXTRA WARNING:** This only works when you have a maximum of a SINGLE component INSTANCE
+of each kind. That means - it does NOT support MULTIPLE INSTANCES of a single component.
+
 **WARNING:** Keeping data in React component's state is a bad idea. React
 component's state is for purely UI state, like "if this dropdown openned or
 closed?". In light of that, React Async is an anti-pattern so you shouldn't use
