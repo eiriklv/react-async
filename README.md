@@ -207,6 +207,10 @@ Where `Message` is a class defined as:
 
 ## API reference
 
+#### **ReactAsync.ComponentId(uniqueIdString)**
+
+Use this mixin to identify your component to React Async. Has to be static to ensure that the id is identical on both the server and the client.
+
 #### **ReactAsync.Mixin**
 
 Components which uses this mixin should define `getInitialStateAsync(cb)` method
