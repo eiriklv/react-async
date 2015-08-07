@@ -23,11 +23,9 @@ var Mixin = {
 
     }
 
-    if (
-      Fiber === undefined ||
-      Fiber.current === undefined ||
-      Fiber.current.__reactAsyncStatePacket === undefined
-    ) {
+    if (Fiber === undefined ||
+        Fiber.current === undefined ||
+        Fiber.current.__reactAsyncStatePacket === undefined) {
       return {};
     }
 
@@ -112,25 +110,10 @@ function renderComponentToStringWithAsyncState(component, cb) {
   return renderToStringAsync(component, cb);
 }
 
-var ComponentId = function(uniqueID) {
-    var mountDepth = 0;
-
-    return {
-        getRootNodeID() {
-            return uniqueID;
-        },
-
-        getMountDepth() {
-            return mountDepth++;
-        },
-    };
-};
-
 module.exports = {
   prefetchAsyncState: prefetchAsyncState,
   isAsyncComponent: isAsyncComponent,
   Mixin: Mixin,
-  ComponentId: ComponentId,
   Preloaded: Preloaded,
   renderComponentToStringWithAsyncState: renderComponentToStringWithAsyncState,
   renderToStringAsync: renderToStringAsync,

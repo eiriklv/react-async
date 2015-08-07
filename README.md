@@ -1,4 +1,4 @@
-# React Async (Legacy edition with hacky React 0.13.x support)
+# React Async
 
 **WARNING:** Keeping data in React component's state is a bad idea. React
 component's state is for purely UI state, like "if this dropdown openned or
@@ -53,7 +53,7 @@ declare `getInitialStateAsync(cb)` method:
     var ReactAsync = require('react-async')
 
     var Component = React.createClass({
-      mixins: [ReactAsync.ComponentId('Component_12345'), ReactAsync.Mixin],
+      mixins: [ReactAsync.Mixin],
 
       getInitialStateAsync(cb) {
         xhr('/api/data', function(data) {
@@ -151,7 +151,7 @@ This produces the following markup:
 
       <script>
         window.__reactAsyncStatePacket = {
-          "Component_12345_0": {
+          ".1p74iy9hgqo.1.0__5": {
             "message":"Hello"
           }
         }
